@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import GameCard from '../GameCard/GameCard';
 
 const Gameboard = (props) => {
   // methods
@@ -18,14 +19,7 @@ const Gameboard = (props) => {
   // render methods
   const renderCards = (cards) => {
     return shuffleCards(cards).map((card, index) => {
-      return (
-        <div className='gamecard' key={`${card.name}-${index}`}>
-          <div className='gamecard-body'>
-            <img className='gamecard-body-front' src={card.imageUrl} />
-            <div className='gamecard-body-back'></div>
-          </div>
-        </div>
-      );
+      return <GameCard data={card} key={`${card.name}-${index}`} />;
     });
   };
 
@@ -49,6 +43,7 @@ Gameboard.propTypes = {
 };
 
 Gameboard.defaultProps = {
+  cards: [],
   numberOfCards: 9,
 };
 
