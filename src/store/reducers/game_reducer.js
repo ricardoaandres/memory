@@ -12,13 +12,14 @@ const gameReducer = (state = initialState, action) => {
     case types.GET_CARDS:
       return { ...state, cards: action.cards };
     case types.FLIP_CARD:
-      const movements = state.movements + 1;
       const cards = state.cards;
       let flippedPair = state.flippedPair;
+      let movements;
       let slugs;
 
       if (flippedPair.length <= 2 && !flippedPair.includes(action.cardId)) {
         flippedPair.push(action.cardId);
+        movements = state.movements + 1;
       }
 
       slugs = flippedPair.map(card => card.split('-')[0]);
@@ -29,6 +30,7 @@ const gameReducer = (state = initialState, action) => {
           if (card.slug === slugs[0]) {
             card.flipped = true;
             flippedPair = [];
+            movements = state.movements + 1;
           }
         });
       }
