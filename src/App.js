@@ -13,7 +13,7 @@ function App(props) {
   useEffect(() => {
     // get cards
     if (!props.cards.length) {
-      props.getCards();
+      props.getCards(10);
     }
   }, []);
 
@@ -28,7 +28,7 @@ function App(props) {
 
       <div className='container'>
         <div className='row'>
-          <Gameboard cards={props.cards} />
+          <Gameboard cards={props.cards} flippedPair={props.flippedPair} />
         </div>
       </div>
     </div>
@@ -38,10 +38,12 @@ function App(props) {
 const mapStateToProps = (state) => ({
   cards: state.game.cards,
   numberOfCards: state.game.numberOfCards,
+  flippedPair: state.game.flippedPair,
+  movements: state.game.movements,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getCards: () => dispatch(getCards()),
+  getCards: (numberOfCards) => dispatch(getCards(numberOfCards)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

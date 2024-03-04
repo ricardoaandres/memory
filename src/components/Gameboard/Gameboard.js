@@ -1,25 +1,15 @@
 import PropTypes from 'prop-types';
+
 import GameCard from '../GameCard/GameCard';
 
 const Gameboard = (props) => {
-  // methods
-  const shuffleCards = (cards) => {
-    const inUse = cards.slice(0, props.numberOfCards);
-    let duplicated = inUse.concat(inUse);
-
-    for (let i = duplicated.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-
-      [duplicated[i], duplicated[j]] = [duplicated[j], duplicated[i]];
-    }
-
-    return duplicated;
-  };
-
   // render methods
   const renderCards = (cards) => {
-    return shuffleCards(cards).map((card, index) => {
-      return <GameCard data={card} key={`${card.name}-${index}`} />;
+    return cards.map((card, idx) => {
+      const id = `${card.id}-${idx}`;
+      const flipped = props.flippedPair.includes(id) || card.flipped;
+
+      return <GameCard data={card} id={id} key={id} flipped={flipped} />;
     });
   };
 

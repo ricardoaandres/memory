@@ -1,13 +1,26 @@
+import { connect } from 'react-redux';
+import classname from 'classname';
+
+import { flipCard } from '../../store/actions/game_actions';
+
 const GameCard = (props) => {
   // user methods
   const onCardClicked = () => {
-    // update store to keep track of clicked images
+    if (!props.flipped) {
+      debugger
+      props.flipCard(props.id);
+    }
   };
 
   // render
+  const klass = classname({
+    'gamecard-body': true,
+    'flipped': props.flipped,
+  });
+
   return (
     <div className='gamecard' onClick={onCardClicked}>
-      <div className='gamecard-body'>
+      <div className={klass}>
         <img className='gamecard-body-front' src={props.data.imageUrl} />
         <div className='gamecard-body-back'></div>
       </div>
@@ -15,4 +28,8 @@ const GameCard = (props) => {
   );
 };
 
-export default GameCard;
+const mapDispatchToProps = (dispatch) => ({
+  flipCard: (cardId) => dispatch(flipCard(cardId)),
+});
+
+export default connect(undefined, mapDispatchToProps)(GameCard);
