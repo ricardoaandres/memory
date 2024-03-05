@@ -1,9 +1,17 @@
-const Scoreboard = () => {
+import { connect } from 'react-redux';
+
+const Scoreboard = (props) => {
   return (
     <div className='scoreboard'>
-      #scoreboard
+      mismatches: { props.mismatches }
+      matches: { props.matches }
     </div>
   );
 };
 
-export default Scoreboard;
+const mapStateToProps = (state) => ({
+  matches: state.game.matches,
+  mismatches: state.game.mismatches,
+});
+
+export default connect(mapStateToProps)(Scoreboard);

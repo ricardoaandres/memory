@@ -7,7 +7,6 @@ const GameCard = (props) => {
   // user methods
   const onCardClicked = () => {
     if (!props.flipped) {
-      debugger
       props.flipCard(props.id);
     }
   };
