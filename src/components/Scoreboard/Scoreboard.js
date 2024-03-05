@@ -3,8 +3,14 @@ import { connect } from 'react-redux';
 const Scoreboard = (props) => {
   return (
     <div className='scoreboard'>
-      mismatches: { props.mismatches }
-      matches: { props.matches }
+      <div className='scoreboard-score'>
+        <i className="bi bi-check text-success"></i>
+        Matches: { props.matches }
+      </div>
+      <div className='scoreboard-score'>
+        <i className="bi bi-x text-danger"></i>
+        Mismatches: { props.mismatches }
+      </div>
     </div>
   );
 };
