@@ -5,6 +5,8 @@ const initialState = {
   numberOfCards: 0,
   flippedPair: [],
   movements: 0,
+  matches: 0,
+  mismatches: 0,
 };
 
 const gameReducer = (state = initialState, action) => {
@@ -13,33 +15,37 @@ const gameReducer = (state = initialState, action) => {
       return { ...state, cards: action.cards };
     case types.FLIP_CARD:
       const cards = state.cards;
-      let flippedPair = state.flippedPair;
-      let movements;
+      let { flippedPair, movements, matches, mismatches } = state;
       let slugs;
 
+      // if flipping cards
       if (flippedPair.length <= 2 && !flippedPair.includes(action.cardId)) {
         flippedPair.push(action.cardId);
-        movements = state.movements + 1;
       }
 
       slugs = flippedPair.map(card => card.split('-')[0]);
 
-      // if pairs match
+      // if pair matches
       if (flippedPair.length === 2 && slugs[0] === slugs[1]) {
         cards.forEach((card) => {
           if (card.slug === slugs[0]) {
             card.flipped = true;
-            flippedPair = [];
-            movements = state.movements + 1;
           }
         });
+
+        flippedPair = [];
+        matches = ++matches;
       }
 
+      // if pair does not match
       if (flippedPair.length === 3) {
         flippedPair = [];
+        mismatches = ++mismatches;
       }
 
-      return { ...state, cards, flippedPair, movements };
+      movements = ++movements;
+
+      return { ...state, cards, flippedPair, movements, matches, mismatches };
     default:
       return initialState;
   }
