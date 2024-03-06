@@ -4,7 +4,7 @@ import { thunk } from 'redux-thunk';
 import reducers from './reducers';
 
 const getState = () => {
-  // return localStorage.getItem('memory-store') ? JSON.parse(localStorage.getItem('memory-store')) : {};
+  return localStorage.getItem('memory-store') ? JSON.parse(localStorage.getItem('memory-store')) : {};
 };
 
 const persistedState = getState();

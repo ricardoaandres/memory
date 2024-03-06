@@ -8,6 +8,5 @@ To run this game run `npm start` in a terminal shell. Then open [http://localhos
 
 ### TO DO
 
-- WelcomeModal
 - SuccessModal
 - i18n
