@@ -47,7 +47,7 @@ const gameReducer = (state = initialState, action) => {
 
       return { ...state, cards, flippedPair, movements, matches, mismatches };
     default:
-      return initialState;
+      return state;
   }
 };
 
