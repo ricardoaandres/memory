@@ -39,7 +39,6 @@ const WelcomeModal = (props) => {
               <button type='submit' className='btn btn-primary' onClick={onSubmitClicked}>Start playing</button>
             </div>
           </div>
-
         </div>
       </div>
     </Modal>
