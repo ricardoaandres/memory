@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Gameboard from './components/Gameboard';
 import Scoreboard from './components/Scoreboard';
 import WelcomeModal from './components/WelcomeModal';
+import SuccessModal from './components/SuccessModal';
 
 import { getCards } from './store/actions/game_actions';
 
@@ -23,7 +24,11 @@ function App(props) {
     if (!props.user.username) {
       setModalData({ show: true, type: 'welcome-modal' });
     }
-  }, []);
+
+    if (props.cards.length > 0 && props.cards.length / 2 === props.matches) {
+      setModalData({ show: true, type: 'success-modal' });
+    }
+  }, [props.matches]);
 
   // user actions
   const closeModal = () => {
@@ -35,6 +40,8 @@ function App(props) {
     switch (modalData.type) {
       case 'welcome-modal':
         return <WelcomeModal onClose={closeModal} />;
+      case 'success-modal':
+        return <SuccessModal onClose={closeModal} />;
       default:
         return null;
     }
@@ -46,7 +53,7 @@ function App(props) {
   return (
     <div className='App'>
       { modal }
-
+ 
       <div className='container'>
         <div className='row'>
           <Scoreboard />
@@ -67,6 +74,7 @@ const mapStateToProps = (state) => ({
   numberOfCards: state.game.numberOfCards,
   flippedPair: state.game.flippedPair,
   movements: state.game.movements,
+  matches: state.game.matches,
   user: state.user,
 });
 

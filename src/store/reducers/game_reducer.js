@@ -15,7 +15,8 @@ const gameReducer = (state = initialState, action) => {
       return { ...state, cards: action.cards };
     case types.FLIP_CARD:
       const cards = state.cards;
-      let { flippedPair, movements, matches, mismatches } = state;
+      let flippedPair = Array.from(state.flippedPair);
+      let { movements, matches, mismatches } = state;
       let slugs;
 
       // if flipping cards
@@ -46,6 +47,8 @@ const gameReducer = (state = initialState, action) => {
       movements = ++movements;
 
       return { ...state, cards, flippedPair, movements, matches, mismatches };
+    case types.RESET_GAME:
+      return initialState;
     default:
       return state;
   }
