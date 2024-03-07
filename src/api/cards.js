@@ -1,10 +1,10 @@
 export const getCards = (numberOfCards) => {
-  return fetch('https://fed-team.modyo.cloud/api/content/spaces/animals/types/game/entries?per_page=20').then((response) => {
+  return fetch(`https://fed-team.modyo.cloud/api/content/spaces/animals/types/game/entries?per_page=${numberOfCards}`).then((response) => {
     return response.json();
   }).then((response) => {
     const shuffleCards = (cards) => {
-      const inUse = cards.slice(0, numberOfCards);
-      let duplicated = inUse.concat(inUse);
+      // const inUse = cards.slice(0, numberOfCards);
+      let duplicated = cards.concat(cards);
   
       for (let i = duplicated.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));

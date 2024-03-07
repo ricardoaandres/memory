@@ -18,7 +18,7 @@ function App(props) {
   useEffect(() => {
     // get cards
     if (!props.cards.length) {
-      props.getCards(10);
+      props.getCards(9);
     }
 
     if (!props.user.username) {

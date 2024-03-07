@@ -6,8 +6,8 @@ export const types = {
   RESET_GAME: 'GAME/reset_game'
 };
 
-export const getCards = () => dispatch => {
-  game.getCards().then((cards) => {
+export const getCards = (numberOfCards) => dispatch => {
+  game.getCards(numberOfCards).then((cards) => {
     dispatch({
       type: types.GET_CARDS,
       cards,
